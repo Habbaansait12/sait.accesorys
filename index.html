@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Habban Times</title>
 
   <style>
@@ -14,6 +14,7 @@
       scroll-behavior: smooth;
     }
 
+    /* HEADER */
     header {
       background: black;
       padding: 15px;
@@ -22,29 +23,43 @@
       align-items: center;
       position: sticky;
       top: 0;
+      z-index: 1000;
     }
 
     header h1 {
       color: gold;
       margin: 0;
+      font-size: 22px;
     }
 
     nav a {
       color: white;
       margin: 0 10px;
       text-decoration: none;
+      font-size: 14px;
     }
 
+    nav a:hover {
+      color: gold;
+    }
+
+    /* HERO */
     .hero {
       text-align: center;
-      padding: 80px 20px;
+      padding: 90px 20px;
       background: url('https://images.unsplash.com/photo-1518546305927-5a555bb7020d') center/cover;
     }
 
     .hero h2 {
       font-size: 40px;
+      margin: 0;
     }
 
+    .hero p {
+      font-size: 18px;
+    }
+
+    /* PRODUCTS */
     .products {
       display: flex;
       flex-wrap: wrap;
@@ -66,15 +81,17 @@
       border-radius: 10px;
     }
 
-    button {
+    .product button {
       background: gold;
       border: none;
       padding: 10px;
       margin-top: 10px;
       width: 100%;
       cursor: pointer;
+      font-weight: bold;
     }
 
+    /* CONTACT */
     #contact {
       background: #111;
       padding: 40px;
@@ -85,6 +102,13 @@
       color: lightgreen;
       text-decoration: none;
       font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: black;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -100,11 +124,13 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h2>Luxury That Defines Time</h2>
-  <p>Premium watches built to last</p>
+  <p>Premium watches built for style & class</p>
 </section>
 
+<!-- PRODUCTS -->
 <section id="products" class="products">
 
   <div class="product">
@@ -130,6 +156,7 @@
 
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <h2>Contact Us</h2>
 
@@ -137,11 +164,19 @@
   <p>📧 mohammedhabbaan@gmail.com</p>
   <p>📍 Bangalore, India</p>
 
+  <br>
+
   <a href="https://wa.me/917411013048" target="_blank">
     💬 Chat on WhatsApp
   </a>
 </section>
 
+<!-- FOOTER -->
+<footer>
+  © 2026 Habban Times | All Rights Reserved
+</footer>
+
+<!-- SCRIPT -->
 <script>
 function buy(product) {
   window.location.href =
