@@ -13,45 +13,83 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #050505;
   color: white;
-  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* HEADER */
 header {
   position: fixed;
   width: 100%;
-  padding: 20px 60px;
+  padding: 15px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.4);
   backdrop-filter: blur(12px);
+  transition: 0.3s;
   z-index: 1000;
+}
+
+header.scrolled {
+  background: rgba(0,0,0,0.9);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
 }
 
 .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  letter-spacing: 3px;
+  font-size: 24px;
   color: gold;
 }
 
 .logo span {
   display: block;
-  font-size: 10px;
-  letter-spacing: 5px;
+  font-size: 9px;
+  letter-spacing: 4px;
   color: #aaa;
 }
 
+/* NAV */
 nav a {
   color: #bbb;
-  margin-left: 30px;
+  margin-left: 20px;
   text-decoration: none;
-  transition: 0.3s;
+  position: relative;
 }
 
+nav a.active,
 nav a:hover {
   color: gold;
+}
+
+/* HAMBURGER */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE MENU */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
+  background: #0a0a0a;
+  padding: 80px 20px;
+  transition: 0.4s;
+}
+
+.mobile-nav a {
+  display: block;
+  margin: 20px 0;
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+}
+
+.mobile-nav.active {
+  right: 0;
 }
 
 /* HERO */
@@ -60,17 +98,12 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12%;
-}
-
-.hero-text {
-  max-width: 450px;
-  animation: fadeUp 1.2s ease;
+  padding: 0 10%;
 }
 
 .hero-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 60px;
+  font-size: 55px;
 }
 
 .hero-text p {
@@ -79,10 +112,9 @@ nav a:hover {
 }
 
 .hero-text button {
-  padding: 14px 32px;
+  padding: 14px 30px;
   background: gold;
   border: none;
-  font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -91,41 +123,15 @@ nav a:hover {
   background: #d4af37;
 }
 
-/* HERO IMAGE */
 .hero img {
-  width: 380px;
+  width: 340px;
   filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9));
-  animation: float 4s ease-in-out infinite;
-}
-
-/* FLOAT ANIMATION */
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-/* FADE ANIMATION */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* PRODUCTS */
 .products {
-  padding: 140px 20px;
+  padding: 120px 20px;
   text-align: center;
-}
-
-.products h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 34px;
-  margin-bottom: 80px;
 }
 
 .product-grid {
@@ -141,7 +147,7 @@ nav a:hover {
 }
 
 .product:hover {
-  transform: translateY(-12px);
+  transform: translateY(-10px);
 }
 
 .product img {
@@ -151,11 +157,15 @@ nav a:hover {
 }
 
 .product:hover img {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
-.product h3 {
-  margin: 18px 0;
+.product button {
+  margin-top: 10px;
+  padding: 10px;
+  background: gold;
+  border: none;
+  width: 100%;
 }
 
 /* CONTACT */
@@ -165,30 +175,30 @@ nav a:hover {
   border-top: 1px solid #222;
 }
 
-#contact h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-}
-
-.whatsapp-btn {
-  display: inline-block;
-  background: #25D366;
-  padding: 14px 25px;
-  margin-top: 25px;
-  border-radius: 10px;
-  color: white;
-}
-
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 30px;
+  padding: 25px;
   color: #777;
-  border-top: 1px solid #222;
+}
+
+/* ANIMATION */
+.fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* MOBILE */
-@media(max-width: 800px){
+@media(max-width:768px){
+  nav { display: none; }
+  .menu-toggle { display: block; }
+
   .hero {
     flex-direction: column;
     text-align: center;
@@ -196,12 +206,7 @@ footer {
   }
 
   .hero img {
-    width: 260px;
-    margin-top: 30px;
-  }
-
-  .hero-text h1 {
-    font-size: 36px;
+    margin-top: 20px;
   }
 }
 </style>
@@ -209,36 +214,39 @@ footer {
 
 <body>
 
-<header>
+<header id="header">
   <div class="logo">
     HABBAN
     <span>TIMEPIECES</span>
   </div>
+
   <nav>
     <a href="#products">Collection</a>
     <a href="#contact">Contact</a>
   </nav>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<div class="mobile-nav" id="mobileMenu">
+  <a href="#products" onclick="toggleMenu()">Collection</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
 
+<section class="hero fade">
   <div class="hero-text">
     <h1>Redefining Time.</h1>
-    <p>Crafted for those who demand precision and prestige.</p>
+    <p>Crafted for those who demand precision.</p>
     <button onclick="buy('Featured Watch')">Buy Now</button>
   </div>
 
   <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
-
 </section>
 
-<!-- PRODUCTS -->
-<section id="products" class="products">
+<section id="products" class="products fade">
   <h2>Our Collection</h2>
 
   <div class="product-grid">
-
     <div class="product">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
       <h3>Silver Sport Watch</h3>
@@ -250,19 +258,13 @@ footer {
       <h3>Black Luxury Watch</h3>
       <button onclick="buy('Black Luxury Watch')">Buy Now</button>
     </div>
-
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="fade">
   <h2>Contact</h2>
   <p>📞 +91 7411013048</p>
   <p>📧 mohammedhabbaan@gmail.com</p>
-
-  <a href="https://wa.me/917411013048" class="whatsapp-btn">
-    Chat on WhatsApp
-  </a>
 </section>
 
 <footer>
@@ -274,7 +276,617 @@ function buy(product) {
   window.location.href =
   "https://wa.me/917411013048?text=I want to buy " + product;
 }
+
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+/* Scroll Effects */
+window.addEventListener("scroll", () => {
+  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
+
+  document.querySelectorAll(".fade").forEach(el => {
+    let top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add("show");
+    }
+  });
+});
 </script>
 
 </body>
-</html>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habban Timepieces</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #050505;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  width: 100%;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+header.scrolled {
+  background: rgba(0,0,0,0.9);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: gold;
+}
+
+.logo span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #aaa;
+}
+
+/* NAV */
+nav a {
+  color: #bbb;
+  margin-left: 20px;
+  text-decoration: none;
+  position: relative;
+}
+
+nav a.active,
+nav a:hover {
+  color: gold;
+}
+
+/* HAMBURGER */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE MENU */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
+  background: #0a0a0a;
+  padding: 80px 20px;
+  transition: 0.4s;
+}
+
+.mobile-nav a {
+  display: block;
+  margin: 20px 0;
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+}
+
+.mobile-nav.active {
+  right: 0;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 55px;
+}
+
+.hero-text p {
+  color: #aaa;
+  margin: 20px 0;
+}
+
+.hero-text button {
+  padding: 14px 30px;
+  background: gold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-text button:hover {
+  background: #d4af37;
+}
+
+.hero img {
+  width: 340px;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9));
+}
+
+/* PRODUCTS */
+.products {
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  width: 260px;
+  margin: 40px;
+  transition: 0.4s;
+}
+
+.product:hover {
+  transform: translateY(-10px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 12px;
+  transition: 0.4s;
+}
+
+.product:hover img {
+  transform: scale(1.1);
+}
+
+.product button {
+  margin-top: 10px;
+  padding: 10px;
+  background: gold;
+  border: none;
+  width: 100%;
+}
+
+/* CONTACT */
+#contact {
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid #222;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+}
+
+/* ANIMATION */
+.fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav { display: none; }
+  .menu-toggle { display: block; }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 120px;
+  }
+
+  .hero img {
+    margin-top: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header id="header">
+  <div class="logo">
+    HABBAN
+    <span>TIMEPIECES</span>
+  </div>
+
+  <nav>
+    <a href="#products">Collection</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+
+<div class="mobile-nav" id="mobileMenu">
+  <a href="#products" onclick="toggleMenu()">Collection</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<section class="hero fade">
+  <div class="hero-text">
+    <h1>Redefining Time.</h1>
+    <p>Crafted for those who demand precision.</p>
+    <button onclick="buy('Featured Watch')">Buy Now</button>
+  </div>
+
+  <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
+</section>
+
+<section id="products" class="products fade">
+  <h2>Our Collection</h2>
+
+  <div class="product-grid">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+      <h3>Silver Sport Watch</h3>
+      <button onclick="buy('Silver Sport Watch')">Buy Now</button>
+    </div>
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+      <h3>Black Luxury Watch</h3>
+      <button onclick="buy('Black Luxury Watch')">Buy Now</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="fade">
+  <h2>Contact</h2>
+  <p>📞 +91 7411013048</p>
+  <p>📧 mohammedhabbaan@gmail.com</p>
+</section>
+
+<footer>
+  © 2026 Habban Timepieces
+</footer>
+
+<script>
+function buy(product) {
+  window.location.href =
+  "https://wa.me/917411013048?text=I want to buy " + product;
+}
+
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+/* Scroll Effects */
+window.addEventListener("scroll", () => {
+  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
+
+  document.querySelectorAll(".fade").forEach(el => {
+    let top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add("show");
+    }
+  });
+});
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habban Timepieces</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #050505;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  width: 100%;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+header.scrolled {
+  background: rgba(0,0,0,0.9);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: gold;
+}
+
+.logo span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #aaa;
+}
+
+/* NAV */
+nav a {
+  color: #bbb;
+  margin-left: 20px;
+  text-decoration: none;
+  position: relative;
+}
+
+nav a.active,
+nav a:hover {
+  color: gold;
+}
+
+/* HAMBURGER */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE MENU */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
+  background: #0a0a0a;
+  padding: 80px 20px;
+  transition: 0.4s;
+}
+
+.mobile-nav a {
+  display: block;
+  margin: 20px 0;
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+}
+
+.mobile-nav.active {
+  right: 0;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 55px;
+}
+
+.hero-text p {
+  color: #aaa;
+  margin: 20px 0;
+}
+
+.hero-text button {
+  padding: 14px 30px;
+  background: gold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-text button:hover {
+  background: #d4af37;
+}
+
+.hero img {
+  width: 340px;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9));
+}
+
+/* PRODUCTS */
+.products {
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  width: 260px;
+  margin: 40px;
+  transition: 0.4s;
+}
+
+.product:hover {
+  transform: translateY(-10px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 12px;
+  transition: 0.4s;
+}
+
+.product:hover img {
+  transform: scale(1.1);
+}
+
+.product button {
+  margin-top: 10px;
+  padding: 10px;
+  background: gold;
+  border: none;
+  width: 100%;
+}
+
+/* CONTACT */
+#contact {
+  padding: 120px 20px;
+  text-align: center;
+  border-top: 1px solid #222;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+}
+
+/* ANIMATION */
+.fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav { display: none; }
+  .menu-toggle { display: block; }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 120px;
+  }
+
+  .hero img {
+    margin-top: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header id="header">
+  <div class="logo">
+    HABBAN
+    <span>TIMEPIECES</span>
+  </div>
+
+  <nav>
+    <a href="#products">Collection</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+
+<div class="mobile-nav" id="mobileMenu">
+  <a href="#products" onclick="toggleMenu()">Collection</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<section class="hero fade">
+  <div class="hero-text">
+    <h1>Redefining Time.</h1>
+    <p>Crafted for those who demand precision.</p>
+    <button onclick="buy('Featured Watch')">Buy Now</button>
+  </div>
+
+  <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
+</section>
+
+<section id="products" class="products fade">
+  <h2>Our Collection</h2>
+
+  <div class="product-grid">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+      <h3>Silver Sport Watch</h3>
+      <button onclick="buy('Silver Sport Watch')">Buy Now</button>
+    </div>
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+      <h3>Black Luxury Watch</h3>
+      <button onclick="buy('Black Luxury Watch')">Buy Now</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="fade">
+  <h2>Contact</h2>
+  <p>📞 +91 7411013048</p>
+  <p>📧 mohammedhabbaan@gmail.com</p>
+</section>
+
+<footer>
+  © 2026 Habban Timepieces
+</footer>
+
+<script>
+function buy(product) {
+  window.location.href =
+  "https://wa.me/917411013048?text=I want to buy " + product;
+}
+
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+/* Scroll Effects */
+window.addEventListener("scroll", () => {
+  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
+
+  document.querySelectorAll(".fade").forEach(el => {
+    let top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add("show");
+    }
+  });
+});
+</script>
+
+</body>
+  </html>
