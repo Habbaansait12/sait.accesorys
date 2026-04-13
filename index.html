@@ -11,95 +11,121 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #0a0a0a;
+  background: #050505;
   color: white;
+  overflow-x: hidden;
 }
 
 /* HEADER */
 header {
   position: fixed;
   width: 100%;
-  padding: 20px 50px;
+  padding: 20px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px);
   z-index: 1000;
 }
 
 .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  letter-spacing: 2px;
+  font-size: 28px;
+  letter-spacing: 3px;
   color: gold;
 }
 
 .logo span {
   display: block;
   font-size: 10px;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
   color: #aaa;
-  margin-top: -5px;
 }
 
 nav a {
   color: #bbb;
-  margin-left: 25px;
+  margin-left: 30px;
   text-decoration: none;
-  font-size: 14px;
+  transition: 0.3s;
 }
 
 nav a:hover {
   color: gold;
 }
 
-/* HERO (FEATURED PRODUCT) */
+/* HERO */
 .hero {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10%;
+  padding: 0 12%;
 }
 
 .hero-text {
-  max-width: 400px;
+  max-width: 450px;
+  animation: fadeUp 1.2s ease;
 }
 
 .hero-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 50px;
+  font-size: 60px;
 }
 
 .hero-text p {
-  color: #bbb;
-  margin: 15px 0;
+  color: #aaa;
+  margin: 20px 0;
 }
 
 .hero-text button {
-  padding: 12px 30px;
+  padding: 14px 32px;
   background: gold;
   border: none;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-text button:hover {
+  background: #d4af37;
 }
 
 /* HERO IMAGE */
 .hero img {
-  width: 350px;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+  width: 380px;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9));
+  animation: float 4s ease-in-out infinite;
 }
 
-/* COLLECTION */
+/* FLOAT ANIMATION */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* FADE ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PRODUCTS */
 .products {
-  padding: 120px 20px;
+  padding: 140px 20px;
   text-align: center;
 }
 
 .products h2 {
   font-family: 'Playfair Display', serif;
-  margin-bottom: 60px;
+  font-size: 34px;
+  margin-bottom: 80px;
 }
 
 .product-grid {
@@ -109,53 +135,56 @@ nav a:hover {
 }
 
 .product {
-  width: 250px;
+  width: 260px;
   margin: 40px;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .product:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
 }
 
 .product img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
+  transition: 0.4s;
+}
+
+.product:hover img {
+  transform: scale(1.08);
 }
 
 .product h3 {
-  margin: 15px 0;
-}
-
-.product button {
-  background: gold;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  cursor: pointer;
+  margin: 18px 0;
 }
 
 /* CONTACT */
 #contact {
-  padding: 100px 20px;
+  padding: 120px 20px;
   text-align: center;
   border-top: 1px solid #222;
+}
+
+#contact h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
 }
 
 .whatsapp-btn {
   display: inline-block;
   background: #25D366;
-  padding: 12px 20px;
-  margin-top: 20px;
-  border-radius: 8px;
+  padding: 14px 25px;
+  margin-top: 25px;
+  border-radius: 10px;
   color: white;
 }
 
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 30px;
   color: #777;
+  border-top: 1px solid #222;
 }
 
 /* MOBILE */
@@ -163,12 +192,16 @@ footer {
   .hero {
     flex-direction: column;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 120px;
   }
 
   .hero img {
-    width: 250px;
-    margin-top: 20px;
+    width: 260px;
+    margin-top: 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
   }
 }
 </style>
@@ -187,20 +220,20 @@ footer {
   </nav>
 </header>
 
-<!-- HERO (FEATURED PRODUCT) -->
+<!-- HERO -->
 <section class="hero">
 
   <div class="hero-text">
-    <h1>Precision. Power. Prestige.</h1>
-    <p>Luxury watches crafted for timeless elegance</p>
+    <h1>Redefining Time.</h1>
+    <p>Crafted for those who demand precision and prestige.</p>
     <button onclick="buy('Featured Watch')">Buy Now</button>
   </div>
 
-  <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314">
+  <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
 
 </section>
 
-<!-- COLLECTION -->
+<!-- PRODUCTS -->
 <section id="products" class="products">
   <h2>Our Collection</h2>
 
