@@ -2,164 +2,108 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Habban Timepieces</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #050505;
+  background: #0a0a0a;
   color: white;
   scroll-behavior: smooth;
 }
 
 /* HEADER */
 header {
-  position: fixed;
-  width: 100%;
-  padding: 15px 25px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px);
-  transition: 0.3s;
+  position: sticky;
+  top: 0;
   z-index: 1000;
+  border-bottom: 1px solid #222;
 }
 
-header.scrolled {
-  background: rgba(0,0,0,0.9);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-}
-
+/* LOGO */
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
+  letter-spacing: 2px;
   color: gold;
 }
 
 .logo span {
   display: block;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 4px;
   color: #aaa;
+  margin-top: -4px;
 }
 
 /* NAV */
 nav a {
-  color: #bbb;
-  margin-left: 20px;
+  color: #ccc;
+  margin-left: 15px;
   text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
 nav a:hover {
   color: gold;
 }
 
-/* HAMBURGER */
-.menu-toggle {
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
+/* SECTIONS FIX */
+section {
+  scroll-margin-top: 80px;
 }
 
-/* MOBILE MENU */
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 70%;
-  height: 100%;
-  background: #0a0a0a;
-  padding: 80px 20px;
-  transition: 0.4s;
-}
-
-.mobile-nav a {
-  display: block;
-  margin: 20px 0;
-  font-size: 18px;
-  color: white;
-  text-decoration: none;
-}
-
-.mobile-nav.active {
-  right: 0;
-}
-
-/* HERO (UPGRADED) */
+/* HERO */
 .hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10%;
-  background: radial-gradient(circle at right, rgba(255,215,0,0.08), transparent 60%);
+  text-align: center;
+  padding: 140px 20px;
+  background:
+  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+  radial-gradient(circle at center, rgba(255,215,0,0.08), transparent 60%),
+  url('https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80') center/cover;
 }
 
-.hero-text h1 {
+.hero h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 58px;
+  font-size: 40px;
 }
 
-.hero-text p {
-  color: #aaa;
-  margin: 20px 0;
-}
-
-.tagline {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #777;
-}
-
-.hero-text button {
-  padding: 14px 30px;
-  background: gold;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(255,215,0,0.4);
-  transition: 0.3s;
-}
-
-.hero-text button:hover {
-  background: #d4af37;
-}
-
-.hero img {
-  width: 340px;
-  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9));
+.hero p {
+  color: #bbb;
+  margin-top: 10px;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 /* PRODUCTS */
 .products {
-  padding: 120px 20px;
-  text-align: center;
-}
-
-.products h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-}
-
-.product-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 70px 20px;
 }
 
 .product {
+  background: #141414;
+  margin: 20px;
+  padding: 18px;
+  border-radius: 14px;
   width: 260px;
-  margin: 40px;
-  transition: 0.4s;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #222;
   position: relative;
-}
-
-.product:hover {
-  transform: translateY(-10px);
 }
 
 /* GLOW EFFECT */
@@ -167,82 +111,121 @@ nav a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(255,215,0,0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(255,215,0,0.12), transparent 70%);
   opacity: 0;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .product:hover::before {
   opacity: 1;
 }
 
+.product:hover {
+  transform: translateY(-6px);
+  border-color: gold;
+}
+
 .product img {
   width: 100%;
-  border-radius: 12px;
-  transition: 0.4s;
+  border-radius: 10px;
+  transition: 0.3s;
 }
 
 .product:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .product h3 {
-  margin-top: 15px;
+  margin: 12px 0 5px;
 }
 
 .price {
   color: gold;
   font-weight: bold;
-  margin: 5px 0;
 }
 
 .product button {
-  margin-top: 10px;
-  padding: 10px;
   background: gold;
   border: none;
+  padding: 10px;
+  margin-top: 10px;
   width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.product button:hover {
+  background: #d4af37;
 }
 
 /* CONTACT */
 #contact {
-  padding: 120px 20px;
+  background: #0d0d0d;
+  padding: 80px 20px;
   text-align: center;
   border-top: 1px solid #222;
+}
+
+.contact-box {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 35px;
+  border-radius: 14px;
+  border: 1px solid #222;
+  background: linear-gradient(145deg, #0a0a0a, #111);
+  box-shadow: 0 0 30px rgba(255,215,0,0.05);
+}
+
+.contact-box p {
+  margin: 15px 0;
+  color: #ccc;
+}
+
+.contact-box strong {
+  color: gold;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  background: #25D366;
+  padding: 12px 22px;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.05);
 }
 
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 25px;
+  padding: 20px;
+  background: black;
+  font-size: 12px;
   color: #777;
-}
-
-/* ANIMATION */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1s;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
+  border-top: 1px solid #222;
 }
 
 /* MOBILE */
-@media(max-width:768px){
-  nav { display: none; }
-  .menu-toggle { display: block; }
+@media (max-width: 600px) {
 
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 120px;
+  nav a {
+    margin-left: 10px;
+    font-size: 12px;
   }
 
-  .hero img {
-    margin-top: 20px;
+  .hero h2 {
+    font-size: 28px;
+  }
+
+  .product {
+    width: 90%;
   }
 }
 </style>
@@ -250,91 +233,72 @@ footer {
 
 <body>
 
-<header id="header">
+<header>
   <div class="logo">
     HABBAN
     <span>TIMEPIECES</span>
   </div>
 
   <nav>
-    <a href="#products">Collection</a>
+    <a href="#home">Home</a>
+    <a href="#products">Watches</a>
     <a href="#contact">Contact</a>
   </nav>
-
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 </header>
 
-<div class="mobile-nav" id="mobileMenu">
-  <a href="#products" onclick="toggleMenu()">Collection</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
-</div>
-
-<!-- HERO -->
-<section class="hero fade">
-  <div class="hero-text">
-    <p class="tagline">SWISS INSPIRED • PREMIUM DESIGN • LIMITED EDITION</p>
-    <h1>Redefining Time.</h1>
-    <p>Crafted for those who demand precision.</p>
-    <button onclick="buy('Featured Watch')">Buy Now</button>
-  </div>
-
-  <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
+<section id="home" class="hero">
+  <h2>Luxury That Defines Time</h2>
+  <p>SWISS INSPIRED • PREMIUM DESIGN • LIMITED EDITION</p>
 </section>
 
-<!-- PRODUCTS -->
-<section id="products" class="products fade">
-  <h2>Our Collection</h2>
+<section id="products" class="products">
 
-  <div class="product-grid">
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
-      <h3>Silver Sport Watch</h3>
-      <div class="price">₹7,999</div>
-      <button onclick="buy('Silver Sport Watch')">Buy Now</button>
-    </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
-      <h3>Black Luxury Watch</h3>
-      <div class="price">₹9,999</div>
-      <button onclick="buy('Black Luxury Watch')">Buy Now</button>
-    </div>
-
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314">
+    <h3>Classic Gold Watch</h3>
+    <div class="price">₹9,999</div>
+    <button onclick="buy('Classic Gold Watch')">Buy Now</button>
   </div>
+
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+    <h3>Silver Sport Watch</h3>
+    <div class="price">₹7,999</div>
+    <button onclick="buy('Silver Sport Watch')">Buy Now</button>
+  </div>
+
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+    <h3>Black Luxury Watch</h3>
+    <div class="price">₹11,999</div>
+    <button onclick="buy('Black Luxury Watch')">Buy Now</button>
+  </div>
+
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="fade">
-  <h2>Contact</h2>
-  <p>📞 +91 7411013048</p>
-  <p>📧 mohammedhabbaan@gmail.com</p>
+<section id="contact">
+  <h2>Contact Us</h2>
+
+  <div class="contact-box">
+    <p><strong>Call</strong><br>+91 7411013048</p>
+    <p><strong>Email</strong><br>mohammedhabbaan@gmail.com</p>
+    <p><strong>Location</strong><br>Bangalore, India</p>
+
+    <a href="https://wa.me/917411013048?text=Hello%20I%20am%20interested%20in%20your%20watches" class="whatsapp-btn">
+      Chat on WhatsApp
+    </a>
+  </div>
 </section>
 
 <footer>
-  © 2026 Habban Timepieces
+  © 2026 Habban Timepieces | All Rights Reserved
 </footer>
 
 <script>
 function buy(product) {
   window.location.href =
-  "https://wa.me/917411013048?text=I want to buy " + product;
+    "https://wa.me/917411013048?text=I want to buy " + product;
 }
-
-function toggleMenu() {
-  document.getElementById("mobileMenu").classList.toggle("active");
-}
-
-window.addEventListener("scroll", () => {
-  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
-
-  document.querySelectorAll(".fade").forEach(el => {
-    let top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 100){
-      el.classList.add("show");
-    }
-  });
-});
 </script>
 
 </body>
