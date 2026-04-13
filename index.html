@@ -19,70 +19,87 @@ body {
 header {
   position: fixed;
   width: 100%;
-  padding: 20px 40px;
+  padding: 20px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
   z-index: 1000;
 }
 
 .logo {
   font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  letter-spacing: 2px;
   color: gold;
-  font-size: 24px;
+}
+
+.logo span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #aaa;
+  margin-top: -5px;
 }
 
 nav a {
-  color: #ccc;
-  margin-left: 20px;
+  color: #bbb;
+  margin-left: 25px;
   text-decoration: none;
+  font-size: 14px;
 }
 
 nav a:hover {
   color: gold;
 }
 
-/* HERO */
+/* HERO (FEATURED PRODUCT) */
 .hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
-  url('https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80') center/cover;
-  text-align: center;
+  justify-content: space-between;
+  padding: 0 10%;
 }
 
-.hero h1 {
+.hero-text {
+  max-width: 400px;
+}
+
+.hero-text h1 {
   font-family: 'Playfair Display', serif;
   font-size: 50px;
 }
 
-.hero p {
+.hero-text p {
   color: #bbb;
-  margin: 10px 0 20px;
+  margin: 15px 0;
 }
 
-.hero button {
+.hero-text button {
   padding: 12px 30px;
   background: gold;
   border: none;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
 }
 
-/* PRODUCTS */
+/* HERO IMAGE */
+.hero img {
+  width: 350px;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+}
+
+/* COLLECTION */
 .products {
-  padding: 80px 20px;
+  padding: 120px 20px;
   text-align: center;
 }
 
 .products h2 {
   font-family: 'Playfair Display', serif;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .product-grid {
@@ -92,8 +109,13 @@ nav a:hover {
 }
 
 .product {
-  width: 260px;
-  margin: 20px;
+  width: 250px;
+  margin: 40px;
+  transition: 0.3s;
+}
+
+.product:hover {
+  transform: translateY(-10px);
 }
 
 .product img {
@@ -102,7 +124,7 @@ nav a:hover {
 }
 
 .product h3 {
-  margin: 10px 0 5px;
+  margin: 15px 0;
 }
 
 .product button {
@@ -115,7 +137,7 @@ nav a:hover {
 
 /* CONTACT */
 #contact {
-  padding: 60px 20px;
+  padding: 100px 20px;
   text-align: center;
   border-top: 1px solid #222;
 }
@@ -124,7 +146,7 @@ nav a:hover {
   display: inline-block;
   background: #25D366;
   padding: 12px 20px;
-  margin-top: 15px;
+  margin-top: 20px;
   border-radius: 8px;
   color: white;
 }
@@ -135,39 +157,54 @@ footer {
   padding: 20px;
   color: #777;
 }
+
+/* MOBILE */
+@media(max-width: 800px){
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 100px;
+  }
+
+  .hero img {
+    width: 250px;
+    margin-top: 20px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">HABBAN</div>
+  <div class="logo">
+    HABBAN
+    <span>TIMEPIECES</span>
+  </div>
   <nav>
-    <a href="#products">Watches</a>
+    <a href="#products">Collection</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<!-- HERO -->
+<!-- HERO (FEATURED PRODUCT) -->
 <section class="hero">
-  <h1>Timeless Luxury</h1>
-  <p>Discover premium watches crafted for elegance</p>
-  <button onclick="document.getElementById('products').scrollIntoView()">
-    Explore Collection
-  </button>
+
+  <div class="hero-text">
+    <h1>Precision. Power. Prestige.</h1>
+    <p>Luxury watches crafted for timeless elegance</p>
+    <button onclick="buy('Featured Watch')">Buy Now</button>
+  </div>
+
+  <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314">
+
 </section>
 
-<!-- PRODUCTS -->
+<!-- COLLECTION -->
 <section id="products" class="products">
   <h2>Our Collection</h2>
 
   <div class="product-grid">
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314">
-      <h3>Classic Gold Watch</h3>
-      <button onclick="buy('Classic Gold Watch')">Buy Now</button>
-    </div>
 
     <div class="product">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
@@ -187,7 +224,6 @@ footer {
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-
   <p>📞 +91 7411013048</p>
   <p>📧 mohammedhabbaan@gmail.com</p>
 
