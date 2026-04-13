@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Habban Times</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
+            color: white;
+        }
+
+        header {
+            background: black;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            color: gold;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: url('https://images.unsplash.com/photo-1518546305927-5a555bb7020d') no-repeat center/cover;
+        }
+
+        .hero h2 {
+            font-size: 40px;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product {
+            background: #1c1c1c;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        button {
+            background: gold;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: black;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>⌚ Habban Times</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Watches</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Luxury That Defines Time</h2>
+    <p>Premium watches built to last</p>
+</section>
+
+<section id="products" class="products">
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314">
+        <h3>Classic Gold Watch</h3>
+        <p>$120</p>
+        <button onclick="buyNow('Classic Gold Watch')">Buy Now</button>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+        <h3>Silver Sport Watch</h3>
+        <p>$95</p>
+        <button onclick="buyNow('Silver Sport Watch')">Buy Now</button>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+        <h3>Black Luxury Watch</h3>
+        <p>$150</p>
+        <button onclick="buyNow('Black Luxury Watch')">Buy Now</button>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Habban Times | All Rights Reserved</p>
+</footer>
+
+<script>
+function buyNow(productName) {
+    alert("You selected: " + productName + "\nContact us to order!");
+}
+</script>
+
+</body>
+</html>
