@@ -53,10 +53,8 @@ nav a {
   color: #bbb;
   margin-left: 20px;
   text-decoration: none;
-  position: relative;
 }
 
-nav a.active,
 nav a:hover {
   color: gold;
 }
@@ -92,18 +90,19 @@ nav a:hover {
   right: 0;
 }
 
-/* HERO */
+/* HERO (UPGRADED) */
 .hero {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 10%;
+  background: radial-gradient(circle at right, rgba(255,215,0,0.08), transparent 60%);
 }
 
 .hero-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 55px;
+  font-size: 58px;
 }
 
 .hero-text p {
@@ -111,11 +110,18 @@ nav a:hover {
   margin: 20px 0;
 }
 
+.tagline {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #777;
+}
+
 .hero-text button {
   padding: 14px 30px;
   background: gold;
   border: none;
   cursor: pointer;
+  box-shadow: 0 0 20px rgba(255,215,0,0.4);
   transition: 0.3s;
 }
 
@@ -134,6 +140,11 @@ nav a:hover {
   text-align: center;
 }
 
+.products h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+}
+
 .product-grid {
   display: flex;
   flex-wrap: wrap;
@@ -144,10 +155,25 @@ nav a:hover {
   width: 260px;
   margin: 40px;
   transition: 0.4s;
+  position: relative;
 }
 
 .product:hover {
   transform: translateY(-10px);
+}
+
+/* GLOW EFFECT */
+.product::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,215,0,0.15), transparent 70%);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.product:hover::before {
+  opacity: 1;
 }
 
 .product img {
@@ -158,6 +184,16 @@ nav a:hover {
 
 .product:hover img {
   transform: scale(1.1);
+}
+
+.product h3 {
+  margin-top: 15px;
+}
+
+.price {
+  color: gold;
+  font-weight: bold;
+  margin: 5px 0;
 }
 
 .product button {
@@ -233,8 +269,10 @@ footer {
   <a href="#contact" onclick="toggleMenu()">Contact</a>
 </div>
 
+<!-- HERO -->
 <section class="hero fade">
   <div class="hero-text">
+    <p class="tagline">SWISS INSPIRED • PREMIUM DESIGN • LIMITED EDITION</p>
     <h1>Redefining Time.</h1>
     <p>Crafted for those who demand precision.</p>
     <button onclick="buy('Featured Watch')">Buy Now</button>
@@ -243,24 +281,30 @@ footer {
   <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
 </section>
 
+<!-- PRODUCTS -->
 <section id="products" class="products fade">
   <h2>Our Collection</h2>
 
   <div class="product-grid">
+
     <div class="product">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
       <h3>Silver Sport Watch</h3>
+      <div class="price">₹7,999</div>
       <button onclick="buy('Silver Sport Watch')">Buy Now</button>
     </div>
 
     <div class="product">
       <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
       <h3>Black Luxury Watch</h3>
+      <div class="price">₹9,999</div>
       <button onclick="buy('Black Luxury Watch')">Buy Now</button>
     </div>
+
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact" class="fade">
   <h2>Contact</h2>
   <p>📞 +91 7411013048</p>
@@ -281,7 +325,6 @@ function toggleMenu() {
   document.getElementById("mobileMenu").classList.toggle("active");
 }
 
-/* Scroll Effects */
 window.addEventListener("scroll", () => {
   document.getElementById("header").classList.toggle("scrolled", window.scrollY > 50);
 
